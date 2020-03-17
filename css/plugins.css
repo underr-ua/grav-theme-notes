@@ -1,0 +1,161 @@
+/*!
+* Links is a Grav CMS theme | https://github.com/underr-ua/grav-theme-links
+* Copyright 2017-2019 Andrii Burkatskyi aka underr
+* Licensed under MIT | https://github.com/underr-ua/grav-theme-links/raw/master/LICENSE
+*/
+
+/* Plugin styles */
+
+.search-wrapper-nav .search-input {
+    display: none; /* remove it for transition */
+    width: 0px;
+    background-color: #fcfcfc !important;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.search-wrapper-nav:hover .search-input,
+.search-wrapper-nav .search-input:focus {
+    display: block;
+    margin-left: .25rem;
+    padding-left: .25rem !important;
+    width: 100%;
+    visibility: visible;
+    opacity: 1;
+    /* transition: width 0.3s;
+    -webkit-transition: width .3s;
+    -moz-transition: width 0.3s; */
+}
+
+.search-wrapper {
+    position: relative !important;
+    margin: 1rem 0 !important;
+}
+
+.search-wrapper .fa-search {
+    color: #555 !important;
+    position: absolute !important;
+    top: 0.25rem !important;
+    left: 0.25rem !important;
+}
+
+.search-wrapper {
+    width: 100%;
+}
+
+.search-wrapper .search-input {
+    width: 100% !important;
+    padding-left: .25rem !important;
+    background-color: #fcfcfc !important;
+}
+
+/* recaptcha contact plugin */
+
+#contact {
+    background-color: whitesmoke;
+}
+
+#contact fieldset {
+    border: 1px solid lightgray;
+}
+
+.recaptcha-form-group {
+    padding: 0.1rem;
+}
+
+.recaptcha-form-group .control-label {
+    display: block !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    font-size: 1.2rem;
+    font-weight: 800;
+}
+
+.form-control {
+    display: block !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0.5rem 0 !important;
+}
+
+.recaptcha-contact .g-recaptcha {
+    margin-right: 0 !important;
+}
+
+.antispam-div,
+legend.legend {
+    display: none !important;
+}
+
+/* archive plugin */
+
+.archives {
+    font-size: 1rem !important;
+    padding: 0 !important;
+    margin: auto !important;
+}
+
+ul.archives li {
+    margin-top: 2px;
+    margin-bottom: 4px;
+    list-style-type: none;
+}
+
+ul.archives li > a {
+    white-space: nowrap !important;
+}
+
+/* pagination plugin */
+
+.pagination {
+    margin: 2rem 0 !important;
+}
+
+.pagination li {
+    background-color: whitesmoke;
+}
+
+/* Markdown notices */
+
+.notices {
+    border-left-width: 4px !important;
+}
+
+.notices p {
+    margin: 10px 0 !important;
+}
+
+/* Page-TOC */
+.page-toc {
+    background-color: whitesmoke;
+    border-bottom: 2px solid #28a745;
+}
+
+.page-toc ul {
+    list-style-type: none;
+    padding-left: 0.5rem !important;
+}
+
+.page-toc ul li {
+    font-weight: normal;
+}
+
+.page-toc > ul,
+.page-toc > ul > li.first.last > ul {
+    list-style-type: none !important;
+    padding-left: 0 !important;
+}
+
+/* grav-image-captions-alt */
+figure.image-caption {
+    display: inline-block!important;
+    margin: 4px!important;
+}
+
+figure img.caption {
+    max-width: 100%;
+}
+
+img.img-responsive.img-bordered {
+    margin: 4px;
+}

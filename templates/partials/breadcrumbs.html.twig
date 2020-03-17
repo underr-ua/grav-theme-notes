@@ -1,0 +1,65 @@
+{#
+* Notes is a Grav CMS theme | https://github.com/underr-ua/grav-theme-notes
+* Copyright 2017-2019 Andrii Burkatskyi aka underr
+* Licensed under MIT | https://github.com/underr-ua/grav-theme-notes/raw/master/LICENSE
+#}
+
+{% set crumbs = breadcrumbs.get() %}
+{% set breadcrumbs_config = config.plugins.breadcrumbs %}
+
+{% if crumbs|length > 1 or breadcrumbs_config.show_all %}
+    <nav class="breadcrumb" itemscope="itemscope" itemtype="https://schema.org/BreadcrumbList">
+        {% set i = 0 %}
+
+        {% for crumb in crumbs %}
+            {% set crumb_name %}
+            <span itemprop="name">
+                {{ crumb.menu }}
+            </span>
+            {% endset %}
+
+            {% if loop.first and breadcrumbs_config.include_home %}
+                {% set i = -1 %}
+
+                <span class="breadcrumb-item">
+                    <a href="{{ crumb.url }}">
+                        <span>
+                            {% if breadcrumbs_config.icon_home %}
+                                <i class="i-home"></i>
+                            {% else %}
+                                {{ crumb.menu }}
+                            {% endif %}
+                        </span>
+                    </a>
+                </span>
+            {% else %}
+                <span class="breadcrumb-item" itemprop="itemListElement" itemscope="itemscope" itemtype="https://schema.org/ListItem">
+
+                    {% if not loop.last %}
+                        {% if crumb.routable %}
+                            <a href="{{ crumb.url }}" itemid="{{ crumb.url(true) }}" itemprop="item" itemscope="itemscope" itemtype="https://schema.org/Thing">
+                                {{ crumb_name }}
+                            </a>
+                        {% else %}
+                            {{ crumb_name }}
+                        {% endif %}
+
+                        <meta content="{{ loop.index + i }}" itemprop="position">
+                    {% else %}
+                        {% if breadcrumbs_config.link_trailing %}
+                            <a href="{{ crumb.url }}" itemid="{{ crumb.url(true) }}" itemprop="item" itemscope="itemscope" itemtype="https://schema.org/Thing">
+                                {{ crumb_name }}
+                            </a>
+                        {% else %}
+                            <span itemid="{{ crumb.url(true) }}" itemprop="item" itemscope="itemscope" itemtype="https://schema.org/Thing">
+                                {{ crumb_name }}
+                            </span>
+                        {% endif %}
+
+                        <meta content="{{ loop.index + i }}" itemprop="position">
+                    {% endif %}
+                </span>
+            {% endif %}
+        {% endfor %}
+    </nav>
+{% endif %}

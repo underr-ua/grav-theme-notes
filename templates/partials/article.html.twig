@@ -1,0 +1,74 @@
+{#
+* Notes is a Grav CMS theme | https://github.com/underr-ua/grav-theme-notes
+* Copyright 2017-2019 Andrii Burkatskyi aka underr
+* Licensed under MIT | https://github.com/underr-ua/grav-theme-notes/raw/master/LICENSE
+#}
+
+<article class="article" itemscope="itemscope" itemtype="https://schema.org/Article">
+    {% set banner = page.media[page.template() ~ '.jpg']|default(page.media[page.template() ~ '.jpeg'])|default(page.media[page.template() ~ '.png'])|default(page.media.images|first) %}
+
+    <header class="article-title"}}">
+        <h2 itemprop="headline name">
+            <span class="border-bottom border-r-0">
+                {{ page.title|upper }}
+            </span>
+        </h2>
+    </header>
+
+    {% if page.header.metadata.description and page.header.description.abstract %}
+        <p class="article-abstract ml-3 align-right" itemprop="description">
+            {{ page.header.metadata.description }}
+        </p>
+    {% endif %}
+
+    <div class="article-meta align-right">
+        {% include 'partials/date.html.twig' with { 'date': page.header.date|date('Y-m-d') } %}
+        {% include 'partials/article_microdata.html.twig' with {
+            'banner' : banner,
+            'page' : page
+        } %}
+    </div>
+
+    {% if config.get('plugins.page-toc.active') or attribute(page.header, 'page-toc').active %}
+        <div class="article-toc page-toc accordion">
+            {% set table_of_contents = toc(page.content) %}
+
+            {% if table_of_contents is not empty %}
+                <input id="page_toc" class="accordion-toggle" type="checkbox"/>
+                <label class="accordion-title h3" for="page_toc">
+                    {{ attribute(page.header, 'page-toc').title }}
+                </label>
+                <div class="accordion-content">
+                    {{ table_of_contents }}
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    <div class="article-content" itemprop="articleBody">
+        {{ page.content }}
+        <div class="article-meta">
+            {% include 'partials/tag_buttons.html.twig' with {'page': page, 'base_url': base_url} %}
+        </div>
+    </div>
+
+    <div class="article-footer justify-between">
+        <div class="article-meta">
+            <i class="i-eye font-sm"></i>
+            {{ viewcounts[page.route]|default(0)}}
+        </div>
+        <div>
+            {% include 'partials/share_buttons.html.twig'%}
+        </div>
+    </div>
+</article>
+
+{% if config.get('plugins.jscomments.enabled') %}
+    <div class="mb-4">
+        {% if config.get('plugins.jscomments.active') or page.header.jscomments.active %}
+            <div>
+                {% include "partials/jscomments.html.twig" %}
+            </div>
+        {% endif %}
+    </div>
+{% endif %}

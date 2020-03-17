@@ -1,0 +1,88 @@
+{#
+* Notes is a Grav CMS theme | https://github.com/underr-ua/grav-theme-notes
+* Copyright 2017-2019 Andrii Burkatskyi aka underr
+* Licensed under MIT | https://github.com/underr-ua/grav-theme-notes/raw/master/LICENSE
+#}
+
+{% set theme_config = attribute(config.themes, config.system.pages.theme) %}
+
+{% set bg = theme_config.content.background %}
+{% set color = theme_config.content.color %}
+{% set max_width = theme_config.content.max_width ? theme_config.content.max_width ~ 'px' %}
+
+<!DOCTYPE html>
+<html lang="ru-UA">
+
+    {% spaceless %}
+        <head>
+            {% block head %}
+                <title>
+                    {% if page.title %}
+                        {{ page.title|e }} | {% if page.header.hero.subtitle %}{{ page.header.hero.subtitle|e|capitalize }}{% else %}{{ site.title|e }}{% endif %}
+                    {% else %}
+                        {{ site.title|e }}
+                    {% endif %}
+                </title>
+
+                <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+                <meta content="width=device-width, initial-scale=1" name="viewport"/>
+                {% include 'partials/metadata.html.twig' with {'page' : page } %}
+
+                <link href="{{ url('theme://images/logo.png') }}" rel="icon" type="image/png"/>
+                <link href="{{ page.url(true, true) }}" rel="canonical"/>
+                <link href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,500&amp;subset=cyrillic-ext" rel="stylesheet">
+
+                {% block stylesheets %}
+                    {% do assets.addCss('theme://css/go-ui.min.css', 100) %}
+                    {% do assets.addCss('theme://css/notes.min.css', 98) %}
+                    {% do assets.addCss('theme://css/plugins.min.css', 97) %}
+                    {% do assets.addCss('theme://css/fontello.min.css', 96) %}
+                    {% do assets.addCss('theme://css/custom.css', 10) %}
+                {% endblock %}
+                {{ assets.css() }}
+
+                {% block javascripts %}
+                    {# {% do assets.addJs('jquery', 100) %} #}
+                    {% do assets.addJs('theme://js/go-ui.min.js', {
+                            'priority': 99,
+                            'loading': 'async',
+                            'group': 'bottom'
+                    }) %}
+                    {% do assets.addJs('theme://js/notes.min.js', {
+                            'priority': 98,
+                            'loading': 'async',
+                            'group': 'bottom'
+                    }) %}
+                {% endblock %}
+                {{ assets.js() }}
+
+            {% endblock head %}
+        </head>
+
+        <body class="{{ page.header.body_classes }} body">
+
+            {% block header %}
+                {% include 'partials/header.html.twig' %}
+            {% endblock %}
+
+            {% block body %}
+                <div class="body-content" style="{% if color %}color:{{ color }};{% endif %}{% if bg %}background-color:{{ bg }};{% endif %}">
+                    <div class="container" style="max-width:{{ max_width }};">
+                        {% block content %}
+                        {% endblock %}
+                    </div>
+                </div>
+                <a class="back-to-top" data-icon="{{ theme_url }}/images/to_top.png" data-time="10" href="javascript:void(0);" id="back-to-top" title="Up"></a>
+            {% endblock %}
+
+            {% block footer %}
+                {% include 'partials/footer.html.twig' %}
+            {% endblock %}
+
+            {% block bottom %}
+                {{ assets.js('bottom') }}
+            {% endblock %}
+        </body>
+
+    </html>
+{% endspaceless %}

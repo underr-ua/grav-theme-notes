@@ -1,0 +1,20 @@
+{#
+* Notes is a Grav CMS theme | https://github.com/underr-ua/grav-theme-notes
+* Copyright 2017-2019 Andrii Burkatskyi aka underr
+* Licensed under MIT | https://github.com/underr-ua/grav-theme-notes/raw/master/LICENSE
+#}
+
+{% set widget = theme_config.list.widget %}
+<div class="u u-auto mx-auto">
+    <a href="{{ listing.url }}">
+        <div class="j-shadow-stack bg-image bg-lite m-3"
+                style="background-image:url({{ banner.quality(32).url }});
+                {% if widget.width %}width:{{ widget.width }}px;{% endif %}
+                {% if widget.height %}height:{{ widget.height }}px;{% endif %}
+                {% if widget.background %}background-color:{{ widget.background }};{% endif %}">
+            <div class="sticker">
+                <span class="h4 text-break text-dark">{{ listing.title }}</span>
+            </div>
+        </div>
+    </a>
+</div>

@@ -1,0 +1,49 @@
+{#
+* Notes is a Grav CMS theme | https://github.com/underr-ua/grav-theme-notes
+* Copyright 2017-2019 Andrii Burkatskyi aka underr
+* Licensed under MIT | https://github.com/underr-ua/grav-theme-notes/raw/master/LICENSE
+#}
+
+
+{% set dropdown = theme_config.navbar.dropdown %}
+{% set icon = theme_config.navbar.icon %}
+
+<nav id="main_nav" class="nav nav-expand-md {{ classes }}" data-class="nav-open">
+    <a class="nav-toggle" data-id="main_nav" href="javascript:void(0);">
+        <i class="i-menu" data-icon="i-cancel" aria-hidden="true"></i>
+    </a>
+    <div class="nav-header">
+        <a href="{{ base_url == '' ? '/' : base_url }}">
+            <span class="ml-1" id="brand-text">
+                <i aria-hidden="true" class="i-globe"></i>
+                {{ config.site.title|e }}
+            </span>
+        </a>
+    </div>
+    <div class="nav-list">
+        {% for page in pages.children.visible %}
+            {% set menu %}
+            {% if page.header.icon %}
+                <i class="{{ page.header.icon }}"></i>
+            {% endif %}
+
+            {{ page.menu }}
+            {% endset %}
+
+            {% if not page.active %}
+                <a class="nav-item" href="{{ page.url }}">
+                    {{ menu }}
+                </a>
+            {% else %}
+                <a class="nav-item active" href="{{ page.url }}" style="{{ active_color }}">
+                    {{ menu }}
+                </a>
+                {# <span class="nav-item active" style="{{ active_color }}">{{ page_menu }}</span> #}
+            {% endif %}
+        {% endfor %}
+
+        {% if config.plugins.simplesearch.enabled and uri.path() != (config.plugins.simplesearch.route) %}
+            {% include 'partials/simplesearch_navigation.html.twig' %}
+        {% endif %}
+    </div>
+</nav>

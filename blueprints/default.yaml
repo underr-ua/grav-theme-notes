@@ -1,0 +1,81 @@
+title: default
+extends@: parent@
+form:
+  fields:
+    tabs:
+      type: tabs
+      active: 1
+      fields:
+        content:
+          type: tab
+          fields:
+            header.title:
+              ordering@: 1
+            header.hero.title:
+              type: text
+              toggleable: true
+              label: Hero title
+              help: Page title displayed on page hero
+              style: vertical
+              ordering@: 2
+            header.hero.subtitle:
+              type: text
+              toggleable: true
+              label: Hero subtitle
+              help: Page subtitle displayed on page hero
+              style: vertical
+              ordering@: 3
+        options:
+          type: tab
+          fields:
+            description:
+              type: section
+              title: Metadata description
+              underline: true
+              fields:
+                header.description.preview:
+                  type: toggle
+                  toggleable: true
+                  label: As preview
+                  help: Use metadata description in article preview
+                  highlight: 0
+                  options:
+                    1: PLUGIN_ADMIN.YES
+                    0: PLUGIN_ADMIN.NO
+                  validate:
+                    type: bool
+                header.description.abstract:
+                  type: toggle
+                  toggleable: true
+                  label: As abstract
+                  help: Use metadata description as article abstract
+                  highlight: 0
+                  options:
+                    1: PLUGIN_ADMIN.YES
+                    0: PLUGIN_ADMIN.NO
+                  validate:
+                    type: bool
+            page-toc:
+              type: section
+              title: Table of Contents
+              underline: true
+              fields:
+                header.page-toc.active:
+                  type: toggle
+                  toggleable: true
+                  label: Show ToC
+                  help: Show table of contents
+                  highlight: 1
+                  options:
+                    1: PLUGIN_ADMIN.YES
+                    0: PLUGIN_ADMIN.NO
+                  validate:
+                    type: bool
+                header.page-toc.title:
+                  type: text
+                  toggleable: true
+                  label: 'ToC title'
+                  help: 'Title for the table of contents'
+                  default: 'Table of Contents'
+                  placeholder: 'Table of Contents'
+                  size: large

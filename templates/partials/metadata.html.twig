@@ -1,0 +1,12 @@
+{% for key, val in page.header.metadata %}
+    <meta
+        name="{{ key }}" content="{{ val }}"/>
+{% endfor %}
+
+{# {% for meta in page.header.metadata %}
+    {% if meta.name %}<meta name="{{ meta.name }}" /> {% endif %}
+    {% if meta.http_equiv %}<meta http-equiv="{{ meta.http_equiv }}" />{% endif %}
+    {% if meta.charset %}<meta charset="{{ meta.charset }}" /> {% endif %}
+    {% if meta.property %}<meta property="{{ meta.property }}" /> {% endif %}
+    {% if meta.content %}<meta content="{{ meta.content }}" />{% endif %}
+{% endfor %} #}

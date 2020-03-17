@@ -1,0 +1,23 @@
+{#
+* Notes is a Grav CMS theme | https://github.com/underr-ua/grav-theme-notes
+* Copyright 2017-2019 Andrii Burkatskyi aka underr
+* Licensed under MIT | https://github.com/underr-ua/grav-theme-notes/raw/master/LICENSE
+#}
+
+{% set height = theme_config.footer.height ? theme_config.footer.height ~ 'px' %}
+{% set footer_text = config.site.title|lower %}
+
+<footer class="body-footer" style="height:{{ height }};">
+    <div>
+        &copy;&nbsp;2017-{{ "now"|date("Y") }}&nbsp;
+        {% if page.url == '' or page.url == '/' %}
+            <span>
+                {{ footer_text }}
+            </span>
+        {% else %}
+            <a href="{{ base_url == '' ? '/' : base_url }}">
+                {{ footer_text }}
+            </a>
+        {% endif %}
+    </div>
+</footer>

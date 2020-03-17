@@ -1,0 +1,74 @@
+{#
+* Notes is a Grav CMS theme | https://github.com/underr-ua/grav-theme-notes
+* Copyright 2017-2019 Andrii Burkatskyi aka underr
+* Licensed under MIT | https://github.com/underr-ua/grav-theme-notes/raw/master/LICENSE
+#}
+
+<section class="card j-shadow bg-paper-photo mx-0" itemscope="itemscope" itemtype="https://schema.org/Article">
+    {% set banner = page.media[page.template() ~ '.jpg']|default(page.media[page.template() ~ '.jpeg'])|default(page.media[page.template() ~ '.png'])|default(page.media.images|first) %}
+    {% if banner %}
+        <a class="card-image bg-image" href="{{ page.url }}" style="background-image:url('{{ banner.quality(32).url }}')"></a>
+    {% endif %}
+
+    <header class="card-title">
+        <h2 class="h4" itemprop="headline name">
+            <a href="{{ page.url }}">
+                <span class="border-bottom border-r-0">
+                    {{ page.title|upper }}
+                </span>
+            </a>
+        </h2>
+    </header>
+
+    <div class="card-meta align-left">
+        <div class="g">
+            <div class="u u-auto u-12-sm">
+                <i class="i-calendar font-sm"></i>
+                {% include 'partials/date.html.twig' with { 'date': page.header.date|date('Y-m-d') } %}
+                <span class="hide-sm">
+                    |
+                </span>
+            </div>
+            <div class="u u-auto u-12-sm">
+                <i class="i-folder font-sm"></i>
+                <a href="{{ page.parent.url }}">
+                    {{ page.parent.title }}
+                </a>
+                <span class="hide-sm">
+                    |
+                </span>
+            </div>
+            <div class="u u-auto u-12-sm">
+                {% include 'partials/tag_buttons.html.twig' with {'page': page, 'base_url': base_url} %}
+            </div>
+        </div>
+    </div>
+
+    <div>
+        {% include 'partials/article_microdata.html.twig' with {
+                'banner' : banner,
+                'page' : page
+            }
+        %}
+    </div>
+
+    {% if page.header.metadata.description and page.header.description.preview %}
+        {% set content = page.header.metadata.description|truncate(300) %}
+    {% else %}
+        {% set content = page.summary|striptags|replace({'\n': '', '\r\n': '', '\t': '', '\n\r': ''}) %}
+    {% endif %}
+
+    <div class="card-content" itemprop="description">
+        {{ content }}
+    </div>
+
+    <div class="card-footer justify-between">
+        <div class="card-meta">
+            <i class="i-eye font-sm"></i>
+            {{ viewcounts[page.route]|default(0)}}
+        </div>
+        <div>
+            {% include 'partials/share_buttons.html.twig'%}
+        </div>
+    </div>
+</section>

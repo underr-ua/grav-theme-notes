@@ -1,0 +1,104 @@
+# * Notes is a Grav CMS theme | https://github.com/underr-ua/grav-theme-notes
+# * Copyright 2017-2019 Andrii Burkatskyi aka underr
+# * Licensed under MIT | https://github.com/underr-ua/grav-theme-notes/raw/master/LICENSE
+
+title: list
+extends@:
+  type: default
+  context: blueprints://pages
+
+form:
+  fields:
+    tabs:
+      type: tabs
+      active: 1
+      fields:
+        content:
+          fields:
+            content:
+              unset@: true
+        options:
+          fields:
+            publishing:
+              # unset@: true
+              fields:
+                header.date:
+                  unset@: true
+                header.publish_date:
+                  unset@: true
+                header.unpublish_date:
+                  unset@: true
+            taxonomies:
+              unset@: true
+            description:
+              unset@: true
+            page-toc:
+              unset@: true
+            external_links:
+              unset@: true
+            collection:
+              type: section
+              title: Collection
+              underline: true
+              ordering@: 1
+              fields:
+                header.content.items:
+                  label: Collection
+                  type: array
+                  default: { 0: @self.children } # or { taxonomy@.category: note } or { @page.descendants: /notes }
+                  help: '@page.descendants: <path>, 0: @self.children etc '
+                  placeholder_key: taxonomy or page collection
+                  placeholder_value: taxonomy value or folder path
+                  validate:
+                    required: true
+                    type: array
+                header.content.filter.type:
+                  label: Filter by template type
+                  type: select
+                  size: small
+                  help: 'Leave the field empty if you do not want to filter collection'
+                  # default: default # or list
+                  data-options@: '\Grav\Common\Page\Pages::pageTypes'
+                  validate:
+                    type: text
+                header.content.order.by:
+                  type: select
+                  label: Order By
+                  default: date
+                  options:
+                    folder: Folder
+                    title: Title
+                    date: Date
+                    default: Default
+                header.content.order.dir:
+                  type: select
+                  label: Order
+                  default: desc
+                  options:
+                    asc: PLUGIN_ADMIN.ASCENDING
+                    desc: PLUGIN_ADMIN.DESCENDING
+            pagination:
+              type: section
+              title: Pagination
+              ordering@: 3
+              underline: true
+              fields:
+                header.content.pagination:
+                  type: toggle
+                  label: Pagination
+                  highlight: 0
+                  default: 1
+                  options:
+                    1: PLUGIN_ADMIN.YES
+                    0: PLUGIN_ADMIN.NO
+                  validate:
+                    type: bool
+                header.content.limit:
+                  type: number
+                  label: Max Item Count
+                  default: 4
+                  validate:
+                    required: true
+                    type: int
+                    min: 1
+

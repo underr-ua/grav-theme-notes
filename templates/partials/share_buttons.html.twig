@@ -1,0 +1,18 @@
+{#
+* Notes is a Grav CMS theme | https://github.com/underr-ua/grav-theme-notes
+* Copyright 2017-2019 Andrii Burkatskyi aka underr
+* Licensed under MIT | https://github.com/underr-ua/grav-theme-notes/raw/master/LICENSE
+#}
+
+<a href="http://www.facebook.com/sharer.php?u={{ page.url(true) }}&amp;title={{ page.title|url_encode }}"
+    target="_blank" title="Share to Facebook">
+    <i class="i-facebook"></i>
+</a>
+<a href="http://twitter.com/share?text={{ page.title|url_encode }}&amp;url={{ page.url(true) }}"
+    target="_blank" title="Share to Twitter">
+    <i class="i-twitter"></i>
+</a>
+<a href="mailto:?Subject={{ page.title|url_encode }}&amp;body={{ page.url(true)|url_encode }}"
+    target="_blank" title="Send by mail">
+    <i class="i-mail"></i>
+</a>

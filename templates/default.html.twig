@@ -1,0 +1,19 @@
+{#
+* Notes is a Grav CMS theme | https://github.com/underr-ua/grav-theme-notes
+* Copyright 2017-2019 Andrii Burkatskyi aka underr
+* Licensed under MIT | https://github.com/underr-ua/grav-theme-notes/raw/master/LICENSE
+#}
+
+{% extends "partials/base.html.twig" %}
+
+{% block content %}
+
+    {% if config.plugins.breadcrumbs.enabled %}
+        {% include 'partials/breadcrumbs.html.twig' %}
+    {% endif %}
+
+    <main>
+        {% include 'partials/article.html.twig' with {'page' : page } %}
+    </main>
+
+{% endblock %}

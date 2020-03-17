@@ -1,0 +1,47 @@
+{#
+* Notes is a Grav CMS theme | https://github.com/underr-ua/grav-theme-notes
+* Copyright 2017-2019 Andrii Burkatskyi aka underr
+* Licensed under MIT | https://github.com/underr-ua/grav-theme-notes/raw/master/LICENSE
+#}
+
+{% extends 'partials/simplesearch_base.html.twig' %}
+
+{% block content %}
+
+    <div class="simplesearch">
+        {% if theme_config.sidebar.search.label %}
+            <header>
+                <h2>
+                    <span class="border-bottom border-r-0">
+                        {{ theme_config.content.sidebar.search.label|t }}
+                    </span>
+                </h2>
+            </header>
+        {% endif %}
+
+        {% include 'partials/simplesearch_searchbox.html.twig' %}
+
+        <p>
+            <span class="border-bottom border-b-0">
+                {% if query %}
+                    {% if search_results.count %}
+                        {{ search_results.count == 1
+                            ? "PLUGIN_SIMPLESEARCH.SEARCH_RESULTS_SUMMARY_SINGULAR"|t(query|e)|raw
+                            : "PLUGIN_SIMPLESEARCH.SEARCH_RESULTS_SUMMARY_PLURAL"|t(query|e, search_results.count)|raw
+                        }}
+                    {% endif %}
+                {% endif %}
+            </span>
+        </p>
+        <div class="g">
+            {% for page in search_results %}
+                <div class="u u-12-md u-6">
+                    {% include 'partials/preview.html.twig' with {
+                        'page' : page
+                    } %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

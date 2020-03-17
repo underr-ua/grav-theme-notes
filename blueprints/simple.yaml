@@ -1,0 +1,24 @@
+# * Notes is a Grav CMS theme | https://github.com/underr-ua/grav-theme-notes
+# * Copyright 2017-2019 Andrii Burkatskyi aka underr
+# * Licensed under MIT | https://github.com/underr-ua/grav-theme-notes/raw/master/LICENSE
+
+title: simple
+'@extends':
+    type: default
+    context: blueprints://pages
+
+form:
+  fields:
+    tabs:
+      type: tabs
+      active: 1
+      fields:
+        options:
+          fields:
+            description:
+              unset@: true
+            taxonomies:
+              unset@: true
+            page-toc:
+              unset@: true
+

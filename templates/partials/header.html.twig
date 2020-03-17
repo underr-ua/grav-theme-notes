@@ -1,0 +1,88 @@
+{#
+* Notes is a Grav CMS theme | https://github.com/underr-ua/grav-theme-notes
+* Copyright 2017-2019 Andrii Burkatskyi aka underr
+* Licensed under MIT | https://github.com/underr-ua/grav-theme-notes/raw/master/LICENSE
+#}
+
+{% set banner = page.media[page.template() ~ '.jpg']|default(page.media[page.template() ~ '.jpeg'])|default(page.media[page.template() ~ '.png'])|default(page.media.images|first) %}
+{% set height = theme_config.hero.height ? theme_config.hero.height ~ 'px' %}
+{% set color = theme_config.hero.color %}
+{% set bg = theme_config.hero.background %}
+
+<div class="d-flex flex-row flex-nowrap" id="attention"></div>
+
+<header class="{{ classes }} body-header">
+    {% include 'partials/navigation.html.twig' %}
+    <div class="hero bg-image" style="{% if banner %}background-image:url('{{ banner.quality(64).url }}');{% endif %} {% if height %}height:{{ height }};{% endif %} {% if color %}color:{{ color }};{% endif %} {% if bg %}background-color:{{ bg }};{% endif %}">
+        <h1 class="hero-title j-text-shadow">
+            {% if page.home %}
+                {{ site.title|default(page.title)|e }}
+            {% else %}
+                {{ page.header.hero.title|default(page.title)|e }}
+            {% endif %}
+            {% if page.header.hero.subtitle %}
+                <span class="hero-subtitle text-nm text-italic">
+                    -
+                    {{ page.header.hero.subtitle|e|lower }}
+                    -
+                </span>
+            {% endif %}
+        </h1>
+    </div>
+</header>
+
+
+<script type="text/javascript">
+    <!--
+    // Detect old browsers that doesn't support flexbox
+    var browser = '{{ browser.getBrowser }}';
+    var version = parseInt('{{  browser.getVersion }}') ||  0;
+    var is_old = false;
+
+    if (browser == 'chrome' && version < 29)
+        is_old = true;
+    else if (browser == 'firefox' && version < 28)
+        is_old = true;
+    else if (browser.includes('opera next') && version < 15)
+        is_old = true;
+    else if (browser.includes('opera') && version < 37)
+        is_old = true;
+    else if (browser == 'msie' && version < 11)
+        is_old = true;
+    else if (browser == 'iemobile' && version < 10)
+        is_old = true;
+    else if (browser == 'edge' && version < 12)
+        is_old = true;
+    else if (browser == 'safari' && version < 9)
+        is_old = true;
+    else if (browser == 'samsungbrowser' && version < 4)
+        is_old = true;
+    else if (browser == 'uc browser')
+        is_old = true;
+    else if (browser == 'android browser' && version <= 4)
+        is_old = true;
+    else if (browser.includes('blackberry') && version < 10)
+        is_old = true;
+    var el = document.getElementById('attention');
+    if (!is_old) {
+        el.remove();
+    } else {
+        var text = '\
+            <span class="flex-1">\
+                <b>Oops!</b> Your browser <span style="color: red;">{{ browser.getBrowser }} {{ browser.getVersion }}</span> is too old or does not support flexbox technology!\
+                If this site or it parts looks strange you should upgrade your browser or use newer version of\
+                <a href="https://www.google.com/chrome" rel="nofollow">Chrome</a>,\
+                <a href="https://getfirefox.com" rel="nofollow">Firefox</a> or\
+                <a href="https://www.opera.com/download" rel="nofollow">Opera</a>.\
+            </span>\
+            <span id="attention_close" class="text-right">&nbsp;&nbsp;<b>x</b>&nbsp;&nbsp;</span>';
+
+        el.insertAdjacentHTML('afterbegin', text);
+        document
+            .getElementById('attention_close')
+            .onclick = function () {
+                el.remove();
+            };
+    }
+    //-->
+</script>

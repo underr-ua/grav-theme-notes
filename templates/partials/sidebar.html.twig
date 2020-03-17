@@ -1,0 +1,122 @@
+{#
+* Notes is a Grav CMS theme | https://github.com/underr-ua/grav-theme-notes
+* Copyright 2017-2019 Andrii Burkatskyi aka underr
+* Licensed under MIT | https://github.com/underr-ua/grav-theme-notes/raw/master/LICENSE
+#}
+
+{% block sidebar %}
+
+    {% set notepaper_width = theme_config.sidebar.widget.width ? theme_config.sidebar.widget.width ~ 'px' %}
+    {% set notepaper_height = theme_config.sidebar.widget.height ? theme_config.sidebar.widget.height ~ 'px' %}
+
+    <div
+        class="g mb-4" id="sidebar">
+        {#
+                {% if theme_config.sidebar.search.enabled %}
+                    <div class="u u-auto mx-auto">
+                        <div
+                            class="j-notepaper bg-lite j-shadow-stack mx-auto"
+                            style="width: {{ notepaper_width }};height: {{ notepaper_height }}; background: {{
+                                theme_config.sidebar.search.background ?: 'white' }};">
+                            <div class="notepaper-title">
+                                {% if theme_config.sidebar.search.title %}
+                                    <span class="border-bottom border-r-0">
+                                        {{ theme_config.sidebar.search.title|t }}
+                                    </span>
+                                {% endif %}
+                            </div>
+                            <div class="notepaper-content">
+                                {% include 'partials/simplesearch_searchbox.html.twig'%}
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+         #}
+        {% if theme_config.sidebar.archive.enabled %}
+            <div class="u u-auto mx-auto">
+                <div
+                    class="j-notepaper bg-lite j-shadow-stack mx-auto"
+                    style="width: {{ notepaper_width }}; height: {{ notepaper_height }}; background: {{
+                        theme_config.sidebar.archive.background ?: 'white' }};">
+                    <div class="notepaper-title">
+                        {% if theme_config.sidebar.archive.title %}
+                            <span class="border-bottom border-r-0">
+                                {{ theme_config.sidebar.archive.title|t }}
+                            </span>
+                        {% endif %}
+                    </div>
+                    <div class="notepaper-content">
+                        {% include 'partials/archives.html.twig' with {
+                            'base_url' : base_url
+                        } %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        {% if config.plugins.taxonomylist.enabled and theme_config.sidebar.tags.enabled %}
+            <div class="u u-auto mx-auto">
+                <div
+                    class="j-notepaper bg-lite j-shadow-stack mx-auto"
+                    style="width: {{ notepaper_width }};
+                        height: {{ notepaper_height }};
+                        background: {{ theme_config.sidebar.tags.background ?: 'white' }};">
+                    <div class="notepaper-title">
+                        {% if theme_config.sidebar.tags.title %}
+                            <span class="border-bottom border-r-0">
+                                {{ theme_config.sidebar.tags.title|t }}
+                            </span>
+                        {% endif %}
+                    </div>
+                    <div class="notepaper-content">
+                        {% if theme_config.sidebar.tags.slice %}
+                            {% include 'partials/tag_cloud.html.twig' with {
+                                'tax_type' : 'tag',
+                                filter: true,
+                                filterstart: 0,
+                                filterend: theme_config.sidebar.tags.slice
+                            } %}
+                        {% else %}
+                            {% include 'partials/tag_cloud.html.twig' with {
+                                'tax_type' : 'tag'
+                            } %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+
+    <script type="text/javascript">
+        <!--
+        // Add transform-skew for the sidebar elements;
+        var skew_enabled = '{{ theme_config.sidebar.widget.skew }}'
+            ? true
+            : false;
+        var get_random = function ( list ) {
+            return list[Math.floor (
+                ( Math.random () * list.length ))];
+        };
+
+        if ( skew_enabled ) {
+            var sidebar_notes = document.getElementsByClassName ( 'j-notepaper' );
+
+            for ( let i = 0; i < sidebar_notes.length; i = i + 1 ) {
+                let d = get_random ( [
+                    0.5,
+                    1,
+                    1.5,
+                    2
+                ] ) * get_random ( [
+                    1,
+                    -1
+                ] );
+                let s = 'transform: skew(' + d + 'deg, ' + ( - d ) + 'deg);';
+
+                sidebar_notes[i].setAttribute ( 'style', sidebar_notes[i].getAttribute ( 'style' ) + s );
+            }
+        }
+        //
+        -->
+    </script>
+{% endblock %}

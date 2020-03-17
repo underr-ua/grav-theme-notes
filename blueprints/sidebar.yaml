@@ -1,0 +1,164 @@
+# * Notes is a Grav CMS theme | https://github.com/underr-ua/grav-theme-notes
+# * Copyright 2017-2019 Andrii Burkatskyi aka underr
+# * Licensed under MIT | https://github.com/underr-ua/grav-theme-notes/raw/master/LICENSE
+
+title: sidebar
+form:
+  fields:
+    tabs:
+      type: tabs
+      active: 1
+      fields:
+        sidebar:
+          type: tab
+          title: Sidebar
+          fields:
+            sidebar:
+              type: section
+              title: Sidebar
+              underline: true
+              fields:
+                header.sidebar.enabled:
+                  type: toggle
+                  label: Show sidebar
+                  highlight: 0
+                  default: 1
+                  options:
+                    1: PLUGIN_ADMIN.ENABLED
+                    0: PLUGIN_ADMIN.DISABLED
+                  validate:
+                    type: bool
+                columns:
+                  type: columns
+                  fields:
+                    column1:
+                      type: column
+                      fields:
+                        header.sidebar.skew.enable:
+                          type: toggle
+                          label: Skew
+                          help: Skew sidebar widget randomly
+                          highlight: 1
+                          default: 0
+                          options:
+                            1: PLUGIN_ADMIN.YES
+                            0: PLUGIN_ADMIN.NO
+                          validate:
+                            type: bool
+            tags:
+              type: section
+              title: Tags
+              underline: true
+              fields:
+                columns:
+                  type: columns
+                  fields:
+                    column1:
+                      type: column
+                      fields:
+                        header.sidebar.tags.enabled:
+                          type: toggle
+                          label: Show widget
+                          help: Taxonomy 'tag' should be present
+                          highlight: 0
+                          default: 1
+                          options:
+                            1: PLUGIN_ADMIN.YES
+                            0: PLUGIN_ADMIN.NO
+                          validate:
+                            type: bool
+                    column2:
+                      type: column
+                      fields:
+                        header.sidebar.tags.label:
+                          type: text
+                          toggleable: true
+                          label: Label
+                          default: Tags
+                          help: Tags widget title
+                          size: small
+                          highlight: 1
+                          validate:
+                            type: text
+
+                header.sidebar.tags.slice:
+                  type: int
+                  toggleable: true
+                  label: Slice
+                  help: Show slice of most used tags
+                  default: 10
+                  highlight: 1
+                  size: small
+                  validate:
+                    type: int
+                    min: 1
+
+            archive:
+              type: section
+              title: Archive
+              underline: true
+              fields:
+                columns:
+                  type: columns
+                  fields:
+                    column1:
+                      type: column
+                      fields:
+                        header.sidebar.archive.enabled:
+                          type: toggle
+                          label: Show widget
+                          highlight: 0
+                          default: 1
+                          options:
+                            1: PLUGIN_ADMIN.YES
+                            0: PLUGIN_ADMIN.NO
+                          validate:
+                            type: bool
+                    column2:
+                      type: column
+                      fields:
+                        header.sidebar.archive.label:
+                          type: text
+                          toggleable: true
+                          label: Label
+                          help: Archive widget title
+                          default: Archive
+                          size: small
+                          highlight: 1
+                          validate:
+                            type: text
+
+            search:
+              type: section
+              title: Search
+              underline: true
+              fields:
+                columns:
+                  type: columns
+                  fields:
+                    column1:
+                      type: column
+                      fields:
+                        header.sidebar.search.enabled:
+                          type: toggle
+                          label: Show widget
+                          highlight: 0
+                          default: 1
+                          options:
+                            1: PLUGIN_ADMIN.YES
+                            0: PLUGIN_ADMIN.NO
+                          validate:
+                            type: bool
+                    column2:
+                      type: column
+                      fields:
+                        header.sidebar.search.label:
+                          type: text
+                          toggleable: true
+                          label: Label
+                          default: Search
+                          help: Search widget title
+                          size: small
+                          highlight: 1
+                          validate:
+                            type: text

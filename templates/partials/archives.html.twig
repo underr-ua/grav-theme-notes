@@ -1,0 +1,27 @@
+{#
+* Notes is a Grav CMS theme | https://github.com/underr-ua/grav-theme-notes
+* Copyright 2017-2019 Andrii Burkatskyi aka underr
+* Licensed under MIT | https://github.com/underr-ua/grav-theme-notes/raw/master/LICENSE
+#}
+
+<ul class="archives">
+    {% for month, items in archives_data %}
+        <li>
+            <span class="border-bottom border-r-0">
+                <a rel="nofollow" href="{{ base_url }}/{{ config.plugins.archives.taxonomy_names.month }}{{ config.system.param_sep }}{{ month|date('M_Y')|lower|e('url') }}">
+                    <span class="archive_date text-dark">
+                        &nbsp;
+                        {{ month }}
+                    </span>
+                </a>
+                {% if archives_show_count %}
+                    &nbsp;(
+                    <span class="text-r-0">
+                        {{ items|length }}
+                    </span>
+                    )
+                {% endif %}
+            </span>
+        </li>
+    {% endfor %}
+</ul>

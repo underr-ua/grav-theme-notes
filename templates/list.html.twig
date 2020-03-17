@@ -1,0 +1,49 @@
+{#
+* Notes is a Grav CMS theme | https://github.com/underr-ua/grav-theme-notes
+* Copyright 2017-2019 Andrii Burkatskyi aka underr
+* Licensed under MIT | https://github.com/underr-ua/grav-theme-notes/raw/master/LICENSE
+#}
+
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+
+    {% if config.plugins.breadcrumbs.enabled and page.url != "/" %}
+        {% include 'partials/breadcrumbs.html.twig' %}
+    {% endif %}
+
+    <div class="g">
+        <div class="{{ theme_config.sidebar.enabled ? 'u u-8 u-12-md' : 'u u-auto mx-auto' }}" data-t="{{page.content.filter}}">
+
+            {% if page.header.content.filter.type == 'list' %}
+                <div class="g">
+
+                    {% for p in page.collection %}
+                        {% set banner = p.media[p.template() ~ '.jpg']|default(p.media[p.template() ~ '.jpeg'])|default(p.media[p.template() ~ '.png'])|default(p.media.images|first) %}
+
+                        {% include 'partials/list.html.twig' with {'banner': banner, 'listing': p } %}
+                    {% endfor %}
+                </div>
+            {% else %}
+                <main>
+                    {% for p in page.collection %}
+                        {% include 'partials/preview.html.twig' with { 'page' : p } %}
+                    {% endfor %}
+                </main>
+            {% endif %}
+
+            {% if config.plugins.pagination.enabled and page.collection.params.pagination %}
+                {% include 'partials/pagination.html.twig' with {
+                'base_url': page.url,
+                'pagination': page.collection.params.pagination
+            } %}
+            {% endif %}
+        </div>
+        {% if theme_config.sidebar.enabled %}
+            <div class="u u-4 u-12-md">
+                {% include 'partials/sidebar.html.twig' %}
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock %}

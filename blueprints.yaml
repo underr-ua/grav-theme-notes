@@ -1,0 +1,296 @@
+name: Notes
+version: 2.0.0
+description: A simple theme for Grav CMS.
+icon: file-text-o
+author:
+  name: Andrii Burkatskyi aka underr
+  email: underr.ua@gmail.com
+homepage: https://github.com/underr-ua/grav-theme-notes
+demo: https://demo.underr.space/grav/notes
+keywords: grav, theme, notes
+bugs: https://github.com/underr-ua/grav-theme-notes/issues
+readme: https://github.com/underr-ua/grav-theme-notes/raw/master/README.md
+license: MIT
+
+form:
+  validation: loose
+  fields:
+    tabs:
+      type: tabs
+      active: 1
+      fields:
+        main:
+          type: tab
+          title: Main
+          fields:
+            content:
+              type: section
+              title: Content
+              underline: true
+              fields:
+                content.max_width:
+                  type: number
+                  label: Max-width
+                  help: Maximal width of site content
+                  size: small
+                  placeholder: e.g. 1200
+                  append: 'px'
+                  highlight: 0
+                  validate:
+                    min: 768
+                    type: int
+                content.color:
+                  type: colorpicker
+                  label: Color
+                content.background:
+                  type: colorpicker
+                  label: Background
+            hero:
+              type: section
+              title: Hero
+              underline: true
+              fields:
+                hero.height:
+                  type: number
+                  label: Height
+                  help: Hero height
+                  size: small
+                  placeholder: e.g. 240
+                  append: 'px'
+                  validate:
+                    type: int
+                hero.color:
+                  type: colorpicker
+                  label: Color
+                hero.background:
+                  type: colorpicker
+                  label: Background
+            navbar:
+              type: section
+              title: Navbar
+              underline: true
+              fields:
+                navbar.dropdown:
+                  type: toggle
+                  label: Dropdown in navbar
+                  default: 0
+                  highlight: 1
+                  options:
+                    1: PLUGIN_ADMIN.ENABLED
+                    0: PLUGIN_ADMIN.DISABLED
+                  validate:
+                    type: bool
+                navbar.icon:
+                  type: text
+                  label: Brand icon
+                  validate:
+                    type: text
+            footer:
+              type: section
+              title: Footer
+              underline: true
+              fields:
+                footer.height:
+                  type: number
+                  label: Height
+                  size: small
+                  append: 'px'
+                  placeholder: e.g. 50
+                  help: Footer height
+                  highlight: 0
+                  validate:
+                    type: int
+            list:
+              type: section
+              title: List
+              underline: true
+              fields:
+                list.widget.width:
+                  type: number
+                  label: Listing widget width
+                  default: 240
+                  placeholder: e.g. 240
+                  append: 'px'
+                  size: small
+                  validate:
+                    type: int
+                list.widget.height:
+                  type: number
+                  label: Listing widget height
+                  default: 320
+                  placeholder: e.g. 320
+                  append: 'px'
+                  size: small
+                  validate:
+                    type: int
+                list.widget.background:
+                  type: colorpicker
+                  default: '#fefefe'
+                  label: Background
+
+            # shared:
+            #   type: section
+            #   title: Share with
+            #   underline: true
+            #   fields:
+            #     share-buttons.enable:
+            #       type: toggle
+            #       label: Show share buttons
+            #       default: 0
+            #       highlight: 1
+            #       options:
+            #         1: PLUGIN_ADMIN.YES
+            #         0: PLUGIN_ADMIN.NO
+            #       validate:
+            #         type: bool
+            #     share-buttons.buttons:
+            #       label: Add button
+            #       type: array
+            #       help: '<icon/text>:<link>'
+            #       placeholder_key: icon or text
+            #       placeholder_value: link
+            #       validate:
+            #         required: true
+            #         type: array
+        sidebar:
+          type: tab
+          title: Sidebar
+          fields:
+            sidebar:
+              type: section
+              title: Sidebar
+              underline: true
+              fields:
+                sidebar.enabled:
+                  type: toggle
+                  label: Show sidebar
+                  default: 1
+                  highlight: 0
+                  options:
+                    1: PLUGIN_ADMIN.ENABLED
+                    0: PLUGIN_ADMIN.DISABLED
+                  validate:
+                    type: bool
+                sidebar.widget.width:
+                  type: number
+                  label: Widget width
+                  help: Sidebar widgets width
+                  default: 250
+                  placeholder: e.g. 250
+                  append: 'px'
+                  size: small
+                  validate:
+                    type: int
+                sidebar.widget.height:
+                  type: number
+                  label: Widget height
+                  help: Sidebar widgets height
+                  default: 250
+                  placeholder: e.g. 250
+                  append: 'px'
+                  size: small
+                  validate:
+                    type: int
+                sidebar.widget.skew:
+                  type: toggle
+                  label: Skew widgets
+                  help: Randomly skew sidebar widgets
+                  default: 0
+                  highlight: 1
+                  options:
+                    1: PLUGIN_ADMIN.ENABLED
+                    0: PLUGIN_ADMIN.DISABLED
+                  validate:
+                    type: bool
+            tags:
+              type: section
+              title: Tags
+              underline: true
+              fields:
+                sidebar.tags.enabled:
+                  type: toggle
+                  label: Show widget
+                  help: Taxonomy 'tag' should be present
+                  default: 1
+                  highlight: 0
+                  options:
+                    1: PLUGIN_ADMIN.ENABLED
+                    0: PLUGIN_ADMIN.DISABLED
+                  validate:
+                    type: bool
+                sidebar.tags.title:
+                  type: text
+                  label: Title
+                  help: Tags widget title
+                  default: Tags
+                  size: small
+                  validate:
+                    type: text
+                sidebar.tags.slice:
+                  type: number
+                  label: Slice
+                  help: Show slice of most used tags
+                  default: 16
+                  size: small
+                  validate:
+                    type: int
+                    min: 0
+                sidebar.tags.background:
+                  type: colorpicker
+                  label: Background
+                  size: small
+
+            archive:
+              type: section
+              title: Archive
+              underline: true
+              fields:
+                sidebar.archive.enabled:
+                  type: toggle
+                  label: Show widget
+                  default: 1
+                  highlight: 0
+                  options:
+                    1: PLUGIN_ADMIN.ENABLED
+                    0: PLUGIN_ADMIN.DISABLED
+                  validate:
+                    type: bool
+                sidebar.archive.title:
+                  type: text
+                  label: Title
+                  help: Archive widget title
+                  default: Archive
+                  size: small
+                  validate:
+                    type: text
+                sidebar.archive.background:
+                  type: colorpicker
+                  label: Background
+                  size: small
+            # search:
+            #   type: section
+            #   title: Search
+            #   underline: true
+            #   fields:
+            #     sidebar.search.enabled:
+            #       type: toggle
+            #       label: Show widget
+            #       highlight: 0
+            #       default: 1
+            #       options:
+            #         1: PLUGIN_ADMIN.ENABLED
+            #         0: PLUGIN_ADMIN.DISABLED
+            #       validate:
+            #         type: bool
+            #     sidebar.search.title:
+            #       type: text
+            #       label: Title
+            #       help: Search widget title
+            #       default: Search
+            #       size: small
+            #       validate:
+            #         type: text
+            #     sidebar.search.background:
+            #       type: colorpicker
+            #       label: Background
+            #       size: small
