@@ -1,6 +1,6 @@
 {#
 * Notes is a Grav CMS theme | https://github.com/underr-ua/grav-theme-notes
-* Copyright 2017-2019 Andrii Burkatskyi aka underr
+* Copyright 2020 Andrii Burkatskyi aka underr
 * Licensed under MIT | https://github.com/underr-ua/grav-theme-notes/raw/master/LICENSE
 #}
 
@@ -15,7 +15,8 @@
     {% include 'partials/navigation.html.twig' %}
     <div class="hero bg-image" style="{% if banner %}background-image:url('{{ banner.quality(64).url }}');{% endif %} {% if height %}height:{{ height }};{% endif %} {% if color %}color:{{ color }};{% endif %} {% if bg %}background-color:{{ bg }};{% endif %}">
         <h1 class="hero-title j-text-shadow">
-            {% if page.home %}
+        TEST HEADER
+            {#{% if page.home %}
                 {{ site.title|default(page.title)|e }}
             {% else %}
                 {{ page.header.hero.title|default(page.title)|e }}
@@ -27,6 +28,7 @@
                     -
                 </span>
             {% endif %}
+            #}
         </h1>
     </div>
 </header>
